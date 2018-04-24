@@ -4,7 +4,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="generator" content="ReText 7.0.0">
 <link rel="stylesheet" media="screen" href="style.css" type="text/css" />
-<title>report</title>
+<title>Video formats comparison</title>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   config: ["MMLorHTML.js"],
@@ -32,7 +32,7 @@ MathJax.Hub.Config({
 <p>The video set is comprised of 30 videos from <a href="https://media.xiph.org/video/derf/">objective-1-fast by Xiph</a>. All videos are YCbCr 4:2:0 Y4M files.</p>
 <h3>Encoders</h3>
 <ul>
-<li>Alliance for Open Media AV1: <code>https://aomedia.googlesource.com/aom/</code>. The versions used is built from GIT revision  <code>7d3bd8daba6e51566f0458e3f842e246a559ea82</code> (february 2018).</li>
+<li>Alliance for Open Media AV1: <code>https://aomedia.googlesource.com/aom/</code>. The versions used is built from GIT revision  <code>935d6d479231c6b5f11d19e56aa931c2976262e7</code> (april 2018).</li>
 <li>Google VP9: <code>https://chromium.googlesource.com/webm/libvpx</code>. The version used is 1.7.0.</li>
 <li>x264: <code>https://www.videolan.org/developers/x264.html</code>. The version used is built from GIT revision  <code>7d0ff22e8c96de126be9d3de4952edd6d1b75a8c</code>.</li>
 <li>x265: <code>https://www.videolan.org/developers/x265.html</code>. The version used is built from GIT revision <code>3cf3839f82bb177c43449ab10792c184c4485d8b</code>.</li>
@@ -60,8 +60,8 @@ MathJax.Hub.Config({
 <h3>Video conversion</h3>
 <p>Each Y4M videos is exported to 4:2:0 10 bits Y4M with FFMPEG:</p>
 <p><code>ffmpeg -y -i [input] -pix_fmt yuv420p10le -strict -1 [output]</code></p>
-<h3>Video compression</h3>
-<p>All videos are compressed over a range of qualities for each encoder:</p>
+<h3>Image compression</h3>
+<p>All videos are compressed over a range of qualities for each codec:</p>
 <ul>
 <li>
 <p>AV1:</p>
@@ -70,8 +70,8 @@ MathJax.Hub.Config({
 </ul>
 </li>
 </ul>
-<p><code>aomenc --cpu-used=2 --tile-columns=4 --passes=2 --pass=1 --bit-depth=10 --input-bit-depth=10 --end-usage=q --cq-level=$q --fpf=[output].log -o [output] [input(Y4M_10bits)]</code></p>
-<p><code>aomenc --cpu-used=2 --tile-columns=4 --passes=2 --pass=2 --bit-depth=10 --input-bit-depth=10 --end-usage=q --cq-level=$q --fpf=[output].log -o [output] [input(Y4M_10bits)]</code></p>
+<p><code>aomenc --cpu-used=4 --tile-columns=4 --passes=2 --pass=1 --bit-depth=10 --input-bit-depth=10 --end-usage=q --cq-level=$q --fpf=[output].log -o [output] [input(Y4M_10bits)]</code></p>
+<p><code>aomenc --cpu-used=4 --tile-columns=4 --passes=2 --pass=2 --bit-depth=10 --input-bit-depth=10 --end-usage=q --cq-level=$q --fpf=[output].log -o [output] [input(Y4M_10bits)]</code></p>
 <ul>
 <li>
 <p>VP9:</p>
@@ -102,8 +102,8 @@ MathJax.Hub.Config({
 <p>The Python script used to generate the compressed videos are available on <a href="https://github.com/WyohKnott/video-comparison-sources">the GIT repository</a>.</p>
 <h3>Encoding and decoding speeds:</h3>
 <p>For each codec and videos, the encoding and decoding duration are mesured using Python timeit. It is then converted in frames per minute.</p>
-<h3>Metrics</h3>
-<p>For each codec and videos, we apply the following metrics, Y-SSIM, RGB-SSIM, Y-MSSSIM, PSNR-HVS-M and VMAF, over samples of increasing quality. For VMAF, we use the trained model <code>vmaf_v0.6.1.pkl</code> given by Netflix.</p>
+<h3>metrics</h3>
+<p>For each codec and videos, we apply the following metrics, Y-SSIM, RGB-SSIM, Y-MSSSIM, PSNR-HVS-M and VMAF, over videos samples of increasing quality. For VMAF, we use the trained model <code>vmaf_v0.6.1.pkl</code> given by Netflix.</p>
 <p>For each sample, we first decode the compressed videos to 4:2:0 10bits Y4M then export to YUV format using FFMPEG (<code>ffmpeg -y -i [input] -pix_fmt yuv420p10le -strict -1 [output]</code>). Finally we apply the metrics over each sample, comparing it to the original video.</p>
 <p>For each codec, we calculate the arithmetic mean of each metric over the entire set of videos, weighted by the number of pixels of the corresponding video, for the samples of increasing quality:</p>
 <p>
@@ -117,47 +117,47 @@ MathJax.Hub.Config({
 <h3>Raw data</h3>
 <p>The following archives contain the raw data in csv format for objective-1-fast:</p>
 <ul>
-<li><a href="objective-1-fast.tar.gz">Subset1</a> (updated February 2018)</li>
+<li><a href="objective-1-fast.tar.gz">Subset1</a> (updated April 2018)</li>
 </ul>
 <h3>Compression speed at 1080p:</h3>
-<p><img class="graph" alt="Encoding speed in function of bits per pixel" src="objective-1-fast.encoding_fpm.1080.(vp9,x264,x265).svg"></p>
+<p><img alt="Encoding speed in function of bits per pixel" src="objective-1-fast.encoding_fpm.1080.(av1-20180415,vp9,x264,x265).svg"></p>
 <h3>Metrics</h3>
 <p>For each comparison algorithms, we plot the quality in dB in function of the mean bits per pixel on a logarithmic scale. We can then visualize which codec gives the best quality at a given bit per pixel (top left is better).</p>
 <h4>Bits per pixel at equivalent quality according to VMAF</h4>
 <h5>360p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.360.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.360.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.720.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.720.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.1080.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.1080.(av1-20180415,vp9,x264,x265).svg"></p>
 <h4>Bits per pixel at equivalent quality according to Y-PSNR-HVS-M</h4>
 <h5>360p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.360.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.360.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.720.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.720.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.1080.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.1080.(av1-20180415,vp9,x264,x265).svg"></p>
 <h4>Bits per pixel at equivalent quality according to Y-MSSSIM</h4>
 <h5>360p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.360.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.360.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.720.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.720.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.1080.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.1080.(av1-20180415,vp9,x264,x265).svg"></p>
 <h4>Bits per pixel at equivalent quality according to Y-SSIM</h4>
 <h5>360p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.360.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.360.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.720.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.720.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.1080.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.1080.(av1-20180415,vp9,x264,x265).svg"></p>
 <h4>Bits per pixel at equivalent quality according to RGB-SSIM</h4>
 <h5>360p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.360.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.360.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.720.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.720.(av1-20180415,vp9,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img class="graph" alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.1080.(vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.1080.(av1-20180415,vp9,x264,x265).svg"></p>
 <h3>CRF equivalences and bitrate reduction at 1080p</h3>
 <p>In the following table, we try to find equivalences between the CRF values of the various encoders according to a selected metric. We then calculate the expected bitrate reduction for this comparable CRF value.</p>
 <p>For example, a x264 encode at CRF 20 would give a PSNR-HVS-M of 42.80. To obtain the same quality with VP9, one should look at the intersection of CRF 20 and "vp9 crf according to psnr-hvs-m", which gives an equivent CRF of 30.60. The column "vp9 % reduction according to psnr-hvs-m" then gives the expected reduction of bitrate, -21.294%.</p>
@@ -646,6 +646,202 @@ MathJax.Hub.Config({
 <td align="right">24.62</td>
 <td align="right">0.06167</td>
 <td align="right">-19.5585</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="right">x264 crf</th>
+<th align="right">x264 bpp</th>
+<th align="right">av1 crf according to y-ssim</th>
+<th align="right">av1 bpp according to y-ssim</th>
+<th align="right">av1 % reduction according to y-ssim</th>
+<th align="right">av1 crf according to rgb-ssim</th>
+<th align="right">av1 bpp according to rgb-ssim</th>
+<th align="right">av1 % reduction according to rgb-ssim</th>
+<th align="right">av1 crf according to ms-ssim</th>
+<th align="right">av1 bpp according to ms-ssim</th>
+<th align="right">av1 % reduction according to ms-ssim</th>
+<th align="right">av1 crf according to psnr-hvs-m</th>
+<th align="right">av1 bpp according to psnr-hvs-m</th>
+<th align="right">av1 % reduction according to psnr-hvs-m</th>
+<th align="right">av1 crf according to vmaf</th>
+<th align="right">av1 bpp according to vmaf</th>
+<th align="right">av1 % reduction according to vmaf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">16</td>
+<td align="right">0.34558</td>
+<td align="right">20.06</td>
+<td align="right">0.31722</td>
+<td align="right">-8.206</td>
+<td align="right">23.42</td>
+<td align="right">0.24274</td>
+<td align="right">-29.76</td>
+<td align="right">20.25</td>
+<td align="right">0.31217</td>
+<td align="right">-9.666</td>
+<td align="right">22.47</td>
+<td align="right">0.26128</td>
+<td align="right">-24.39</td>
+<td align="right">23.31</td>
+<td align="right">0.24488</td>
+<td align="right">-29.14</td>
+</tr>
+<tr>
+<td align="right">17</td>
+<td align="right">0.28786</td>
+<td align="right">23.25</td>
+<td align="right">0.24592</td>
+<td align="right">-14.571</td>
+<td align="right">26.80</td>
+<td align="right">0.18969</td>
+<td align="right">-34.10</td>
+<td align="right">23.31</td>
+<td align="right">0.24484</td>
+<td align="right">-14.947</td>
+<td align="right">25.41</td>
+<td align="right">0.20926</td>
+<td align="right">-27.31</td>
+<td align="right">25.34</td>
+<td align="right">0.21043</td>
+<td align="right">-26.90</td>
+</tr>
+<tr>
+<td align="right">18</td>
+<td align="right">0.23879</td>
+<td align="right">26.50</td>
+<td align="right">0.19369</td>
+<td align="right">-18.886</td>
+<td align="right">30.10</td>
+<td align="right">0.15265</td>
+<td align="right">-36.07</td>
+<td align="right">26.43</td>
+<td align="right">0.19469</td>
+<td align="right">-18.466</td>
+<td align="right">28.36</td>
+<td align="right">0.17069</td>
+<td align="right">-28.52</td>
+<td align="right">27.62</td>
+<td align="right">0.17935</td>
+<td align="right">-24.89</td>
+</tr>
+<tr>
+<td align="right">19</td>
+<td align="right">0.19742</td>
+<td align="right">29.71</td>
+<td align="right">0.15640</td>
+<td align="right">-20.776</td>
+<td align="right">33.27</td>
+<td align="right">0.12633</td>
+<td align="right">-36.01</td>
+<td align="right">29.53</td>
+<td align="right">0.15824</td>
+<td align="right">-19.842</td>
+<td align="right">31.27</td>
+<td align="right">0.14212</td>
+<td align="right">-28.01</td>
+<td align="right">30.19</td>
+<td align="right">0.15180</td>
+<td align="right">-23.11</td>
+</tr>
+<tr>
+<td align="right">20</td>
+<td align="right">0.16285</td>
+<td align="right">32.84</td>
+<td align="right">0.12947</td>
+<td align="right">-20.497</td>
+<td align="right">36.28</td>
+<td align="right">0.10661</td>
+<td align="right">-34.53</td>
+<td align="right">32.57</td>
+<td align="right">0.13154</td>
+<td align="right">-19.226</td>
+<td align="right">34.11</td>
+<td align="right">0.12039</td>
+<td align="right">-26.07</td>
+<td align="right">33.00</td>
+<td align="right">0.12827</td>
+<td align="right">-21.23</td>
+</tr>
+<tr>
+<td align="right">21</td>
+<td align="right">0.13424</td>
+<td align="right">35.87</td>
+<td align="right">0.10909</td>
+<td align="right">-18.736</td>
+<td align="right">39.12</td>
+<td align="right">0.09074</td>
+<td align="right">-32.41</td>
+<td align="right">35.53</td>
+<td align="right">0.11118</td>
+<td align="right">-17.182</td>
+<td align="right">36.89</td>
+<td align="right">0.10302</td>
+<td align="right">-23.26</td>
+<td align="right">35.93</td>
+<td align="right">0.10871</td>
+<td align="right">-19.02</td>
+</tr>
+<tr>
+<td align="right">22</td>
+<td align="right">0.11082</td>
+<td align="right">38.77</td>
+<td align="right">0.09259</td>
+<td align="right">-16.450</td>
+<td align="right">41.78</td>
+<td align="right">0.07713</td>
+<td align="right">-30.40</td>
+<td align="right">38.38</td>
+<td align="right">0.09466</td>
+<td align="right">-14.578</td>
+<td align="right">39.58</td>
+<td align="right">0.08828</td>
+<td align="right">-20.34</td>
+<td align="right">38.77</td>
+<td align="right">0.09255</td>
+<td align="right">-16.49</td>
+</tr>
+<tr>
+<td align="right">23</td>
+<td align="right">0.09185</td>
+<td align="right">41.54</td>
+<td align="right">0.07832</td>
+<td align="right">-14.731</td>
+<td align="right">44.28</td>
+<td align="right">0.06501</td>
+<td align="right">-29.22</td>
+<td align="right">41.12</td>
+<td align="right">0.08040</td>
+<td align="right">-12.465</td>
+<td align="right">42.20</td>
+<td align="right">0.07508</td>
+<td align="right">-18.26</td>
+<td align="right">41.35</td>
+<td align="right">0.07926</td>
+<td align="right">-13.71</td>
+</tr>
+<tr>
+<td align="right">24</td>
+<td align="right">0.07667</td>
+<td align="right">44.18</td>
+<td align="right">0.06546</td>
+<td align="right">-14.613</td>
+<td align="right">46.62</td>
+<td align="right">0.05413</td>
+<td align="right">-29.39</td>
+<td align="right">43.75</td>
+<td align="right">0.06755</td>
+<td align="right">-11.897</td>
+<td align="right">44.73</td>
+<td align="right">0.06290</td>
+<td align="right">-17.95</td>
+<td align="right">43.54</td>
+<td align="right">0.06852</td>
+<td align="right">-10.62</td>
 </tr>
 </tbody>
 </table>
