@@ -18,8 +18,8 @@ The video set is comprised of 30 videos from [objective-1-fast by Xiph](https://
 
 ###Encoders
 
-  * Alliance for Open Media AV1: `https://aomedia.googlesource.com/aom/`. The versions used is built from GIT revision  `935d6d479231c6b5f11d19e56aa931c2976262e7` (april 2018).
-  * Google VP9: `https://chromium.googlesource.com/webm/libvpx`. The version used is 1.7.0.
+  * Alliance for Open Media AV1 libaom: `https://aomedia.googlesource.com/aom/`. The versions used is built from GIT revision  `935d6d479231c6b5f11d19e56aa931c2976262e7` (april 2018).
+  * Google VP9 libvpx: `https://chromium.googlesource.com/webm/libvpx`. The version used is 1.7.0.
   * x264: `https://www.videolan.org/developers/x264.html`. The version used is built from GIT revision  `7d0ff22e8c96de126be9d3de4952edd6d1b75a8c`.
   * x265: `https://www.videolan.org/developers/x265.html`. The version used is built from GIT revision `3cf3839f82bb177c43449ab10792c184c4485d8b`.
 
@@ -53,7 +53,7 @@ Each Y4M videos is exported to 4:2:0 10 bits Y4M with FFMPEG:
 
 All videos are compressed over a range of qualities for each codec:
 
-  * AV1:
+  * AV1 libaom:
   
     - between q=12 and q=60, with a step of 4:
 
@@ -61,7 +61,7 @@ All videos are compressed over a range of qualities for each codec:
 
 `aomenc --cpu-used=4 --tile-columns=4 --passes=2 --pass=2 --bit-depth=10 --input-bit-depth=10 --end-usage=q --cq-level=$q --fpf=[output].log -o [output] [input(Y4M_10bits)]`
   
-  * VP9:
+  * VP9 libvpx:
   
     - between q=12 and q=60, with a step of 4:
 
@@ -112,7 +112,7 @@ The following archives contain the raw data in csv format for objective-1-fast:
 
 ###Compression speed at 1080p:
 
-![Encoding speed in function of bits per pixel](objective-1-fast.encoding_fpm.1080.(av1-20180415,vp9,x264,x265\).svg)
+![Encoding speed in function of bits per pixel](objective-1-fast.encoding_fpm.1080.(libaom-20180415,libaom,x264,x265\).svg)
 
 ###Metrics
 
@@ -122,78 +122,78 @@ For each comparison algorithms, we plot the quality in dB in function of the mea
 
 #####360p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.vmaf.360.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.vmaf.360.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####720p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.vmaf.720.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.vmaf.720.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####1080p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.vmaf.1080.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.vmaf.1080.(libaom-20180415,libaom,x264,x265\).svg)
 
 ####Bits per pixel at equivalent quality according to Y-PSNR-HVS-M
 
 #####360p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.psnr-hvs-m.360.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.psnr-hvs-m.360.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####720p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.psnr-hvs-m.720.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.psnr-hvs-m.720.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####1080p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.psnr-hvs-m.1080.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.psnr-hvs-m.1080.(libaom-20180415,libaom,x264,x265\).svg)
 
 ####Bits per pixel at equivalent quality according to Y-MSSSIM
 
 #####360p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.ms-ssim.360.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.ms-ssim.360.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####720p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.ms-ssim.720.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.ms-ssim.720.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####1080p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.ms-ssim.1080.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.ms-ssim.1080.(libaom-20180415,libaom,x264,x265\).svg)
 
 ####Bits per pixel at equivalent quality according to Y-SSIM
 
 #####360p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.y-ssim.360.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.y-ssim.360.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####720p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.y-ssim.720.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.y-ssim.720.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####1080p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.y-ssim.1080.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.y-ssim.1080.(libaom-20180415,libaom,x264,x265\).svg)
 
 
 ####Bits per pixel at equivalent quality according to RGB-SSIM
 
 #####360p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.rgb-ssim.360.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.rgb-ssim.360.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####720p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.rgb-ssim.720.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.rgb-ssim.720.(libaom-20180415,libaom,x264,x265\).svg)
 
 #####1080p
 
-![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.rgb-ssim.1080.(av1-20180415,vp9,x264,x265\).svg)
+![Bits per pixel at equivalent quality according to VMAF](objective-1-fast.rgb-ssim.1080.(libaom-20180415,libaom,x264,x265\).svg)
 
 ###CRF equivalences and bitrate reduction at 1080p
 
 In the following table, we try to find equivalences between the CRF values of the various encoders according to a selected metric. We then calculate the expected bitrate reduction for this comparable CRF value.
 
-For example, a x264 encode at CRF 20 would give a PSNR-HVS-M of 42.80. To obtain the same quality with VP9, one should look at the intersection of CRF 20 and "vp9 crf according to psnr-hvs-m", which gives an equivent CRF of 30.60. The column "vp9 % reduction according to psnr-hvs-m" then gives the expected reduction of bitrate, -21.294%.
+For example, a x264 encode at CRF 20 would give a PSNR-HVS-M of 42.80. To obtain the same quality with VP9, one should look at the intersection of CRF 20 and "libvpx crf according to psnr-hvs-m", which gives an equivent CRF of 30.60. The column "libvpx % reduction according to psnr-hvs-m" then gives the expected reduction of bitrate, -21.294%.
 
 
  |x264 crf|x264 bpp|x264 y-ssim|x264 rgb-ssim|x264 ms-ssim|x264 psnr-hvs-m|x264 vmaf|
@@ -210,7 +210,7 @@ For example, a x264 encode at CRF 20 would give a PSNR-HVS-M of 42.80. To obtain
 
 
 
-|x264 crf|x264 bpp|vp9 crf according to y-ssim|vp9 bpp according to y-ssim|vp9 % reduction according to y-ssim|vp9 crf according to rgb-ssim|vp9 bpp according to rgb-ssim|vp9 % reduction according to rgb-ssim|vp9 crf according to ms-ssim|vp9 bpp according to ms-ssim|vp9 % reduction according to ms-ssim|vp9 crf according to psnr-hvs-m|vp9 bpp according to psnr-hvs-m|vp9 % reduction according to psnr-hvs-m|vp9 crf according to vmaf|vp9 bpp according to vmaf|vp9 % reduction according to vmaf|
+|x264 crf|x264 bpp|libvpx crf according to y-ssim|libvpx bpp according to y-ssim|libvpx % reduction according to y-ssim|libvpx crf according to rgb-ssim|libvpx bpp according to rgb-ssim|libvpx % reduction according to rgb-ssim|libvpx crf according to ms-ssim|libvpx bpp according to ms-ssim|libvpx % reduction according to ms-ssim|libvpx crf according to psnr-hvs-m|libvpx bpp according to psnr-hvs-m|libvpx % reduction according to psnr-hvs-m|libvpx crf according to vmaf|libvpx bpp according to vmaf|libvpx % reduction according to vmaf|
 |-------:|-------:|--------------------------:|--------------------------:|----------------------------------:|----------------------------:|----------------------------:|------------------------------------:|---------------------------:|---------------------------:|-----------------------------------:|------------------------------:|------------------------------:|--------------------------------------:|------------------------:|------------------------:|--------------------------------:|
 |      16| 0.34558|                      17.24|                    0.35864|                              3.781|                        19.86|                      0.28608|                               -17.22|                       17.72|                     0.34382|                             -0.5091|                          19.74|                        0.28910|                                -16.342|                    21.09|                  0.25810|                          -25.313|
 |      17| 0.28786|                      20.23|                    0.27743|                             -3.624|                        23.01|                      0.22063|                               -23.36|                       20.56|                     0.26966|                             -6.3231|                          22.46|                        0.23068|                                -19.863|                    22.86|                  0.22338|                          -22.399|
@@ -238,7 +238,7 @@ For example, a x264 encode at CRF 20 would give a PSNR-HVS-M of 42.80. To obtain
 
 
 
-|x264 crf|x264 bpp|av1 crf according to y-ssim|av1 bpp according to y-ssim|av1 % reduction according to y-ssim|av1 crf according to rgb-ssim|av1 bpp according to rgb-ssim|av1 % reduction according to rgb-ssim|av1 crf according to ms-ssim|av1 bpp according to ms-ssim|av1 % reduction according to ms-ssim|av1 crf according to psnr-hvs-m|av1 bpp according to psnr-hvs-m|av1 % reduction according to psnr-hvs-m|av1 crf according to vmaf|av1 bpp according to vmaf|av1 % reduction according to vmaf|
+|x264 crf|x264 bpp|libaom crf according to y-ssim|libaom bpp according to y-ssim|libaom % reduction according to y-ssim|libaom crf according to rgb-ssim|libaom bpp according to rgb-ssim|libaom % reduction according to rgb-ssim|libaom crf according to ms-ssim|libaom bpp according to ms-ssim|libaom % reduction according to ms-ssim|libaom crf according to psnr-hvs-m|libaom bpp according to psnr-hvs-m|libaom % reduction according to psnr-hvs-m|libaom crf according to vmaf|libaom bpp according to vmaf|libaom % reduction according to vmaf|
 |-------:|-------:|--------------------------:|--------------------------:|----------------------------------:|----------------------------:|----------------------------:|------------------------------------:|---------------------------:|---------------------------:|-----------------------------------:|------------------------------:|------------------------------:|--------------------------------------:|------------------------:|------------------------:|--------------------------------:|
 |      16| 0.34558|                      20.06|                    0.31722|                             -8.206|                        23.42|                      0.24274|                               -29.76|                       20.25|                     0.31217|                              -9.666|                          22.47|                        0.26128|                                 -24.39|                    23.31|                  0.24488|                           -29.14|
 |      17| 0.28786|                      23.25|                    0.24592|                            -14.571|                        26.80|                      0.18969|                               -34.10|                       23.31|                     0.24484|                             -14.947|                          25.41|                        0.20926|                                 -27.31|                    25.34|                  0.21043|                           -26.90|

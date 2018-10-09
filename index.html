@@ -19,7 +19,7 @@ MathJax.Hub.Config({
 <body>
 <h1>Video formats comparison</h1>
 <h2>Introduction</h2>
-<p>This study compares 4 differents video encoders, AOM AV1, Google VP9, x264 and x265. We use five algorithms in order to compare each format:</p>
+<p>This study compares 4 differents video encoders, AOM AV1 libaom, Google VP9 libvpx, x264 and x265. We use five algorithms in order to compare each format:</p>
 <ul>
 <li>VMAF: Video Multi-Method Assessment Fusion: <a href="http://techblog.netflix.com/2016/06/toward-practical-perceptual-video.html">http://techblog.netflix.com/2016/06/toward-practical-perceptual-video.html</a></li>
 <li>Y-SSIM: Structural Similarity algorithm applied to the luma channel</li>
@@ -32,8 +32,8 @@ MathJax.Hub.Config({
 <p>The video set is comprised of 30 videos from <a href="https://media.xiph.org/video/derf/">objective-1-fast by Xiph</a>. All videos are YCbCr 4:2:0 Y4M files.</p>
 <h3>Encoders</h3>
 <ul>
-<li>Alliance for Open Media AV1: <code>https://aomedia.googlesource.com/aom/</code>. The versions used is built from GIT revision  <code>935d6d479231c6b5f11d19e56aa931c2976262e7</code> (april 2018).</li>
-<li>Google VP9: <code>https://chromium.googlesource.com/webm/libvpx</code>. The version used is 1.7.0.</li>
+<li>Alliance for Open Media AV1 libaom: <code>https://aomedia.googlesource.com/aom/</code>. The versions used is built from GIT revision  <code>935d6d479231c6b5f11d19e56aa931c2976262e7</code> (april 2018).</li>
+<li>Google VP9 libvpx: <code>https://chromium.googlesource.com/webm/libvpx</code>. The version used is 1.7.0.</li>
 <li>x264: <code>https://www.videolan.org/developers/x264.html</code>. The version used is built from GIT revision  <code>7d0ff22e8c96de126be9d3de4952edd6d1b75a8c</code>.</li>
 <li>x265: <code>https://www.videolan.org/developers/x265.html</code>. The version used is built from GIT revision <code>3cf3839f82bb177c43449ab10792c184c4485d8b</code>.</li>
 </ul>
@@ -64,7 +64,7 @@ MathJax.Hub.Config({
 <p>All videos are compressed over a range of qualities for each codec:</p>
 <ul>
 <li>
-<p>AV1:</p>
+<p>AV1 libaom:</p>
 <ul>
 <li>between q=12 and q=60, with a step of 4:</li>
 </ul>
@@ -74,7 +74,7 @@ MathJax.Hub.Config({
 <p><code>aomenc --cpu-used=4 --tile-columns=4 --passes=2 --pass=2 --bit-depth=10 --input-bit-depth=10 --end-usage=q --cq-level=$q --fpf=[output].log -o [output] [input(Y4M_10bits)]</code></p>
 <ul>
 <li>
-<p>VP9:</p>
+<p>VP9 libvpx:</p>
 <ul>
 <li>between q=12 and q=60, with a step of 4:</li>
 </ul>
@@ -120,47 +120,47 @@ MathJax.Hub.Config({
 <li><a href="objective-1-fast.tar.gz">Subset1</a> (updated April 2018)</li>
 </ul>
 <h3>Compression speed at 1080p:</h3>
-<p><img alt="Encoding speed in function of bits per pixel" src="objective-1-fast.encoding_fpm.1080.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Encoding speed in function of bits per pixel" src="objective-1-fast.encoding_fpm.1080.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h3>Metrics</h3>
 <p>For each comparison algorithms, we plot the quality in dB in function of the mean bits per pixel on a logarithmic scale. We can then visualize which codec gives the best quality at a given bit per pixel (top left is better).</p>
 <h4>Bits per pixel at equivalent quality according to VMAF</h4>
 <h5>360p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.360.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.360.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.720.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.720.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.1080.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.vmaf.1080.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h4>Bits per pixel at equivalent quality according to Y-PSNR-HVS-M</h4>
 <h5>360p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.360.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.360.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.720.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.720.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.1080.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.psnr-hvs-m.1080.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h4>Bits per pixel at equivalent quality according to Y-MSSSIM</h4>
 <h5>360p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.360.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.360.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.720.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.720.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.1080.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.ms-ssim.1080.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h4>Bits per pixel at equivalent quality according to Y-SSIM</h4>
 <h5>360p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.360.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.360.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.720.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.720.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.1080.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.y-ssim.1080.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h4>Bits per pixel at equivalent quality according to RGB-SSIM</h4>
 <h5>360p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.360.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.360.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>720p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.720.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.720.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h5>1080p</h5>
-<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.1080.(av1-20180415,vp9,x264,x265).svg"></p>
+<p><img alt="Bits per pixel at equivalent quality according to VMAF" src="objective-1-fast.rgb-ssim.1080.(libaom-20180415,libvpx,x264,x265).svg"></p>
 <h3>CRF equivalences and bitrate reduction at 1080p</h3>
 <p>In the following table, we try to find equivalences between the CRF values of the various encoders according to a selected metric. We then calculate the expected bitrate reduction for this comparable CRF value.</p>
-<p>For example, a x264 encode at CRF 20 would give a PSNR-HVS-M of 42.80. To obtain the same quality with VP9, one should look at the intersection of CRF 20 and "vp9 crf according to psnr-hvs-m", which gives an equivent CRF of 30.60. The column "vp9 % reduction according to psnr-hvs-m" then gives the expected reduction of bitrate, -21.294%.</p>
+<p>For example, a x264 encode at CRF 20 would give a PSNR-HVS-M of 42.80. To obtain the same quality with VP9, one should look at the intersection of CRF 20 and "libvpx crf according to psnr-hvs-m", which gives an equivent CRF of 30.60. The column "libvpx % reduction according to psnr-hvs-m" then gives the expected reduction of bitrate, -21.294%.</p>
 <table>
 <thead>
 <tr>
@@ -262,21 +262,21 @@ MathJax.Hub.Config({
 <tr>
 <th align="right">x264 crf</th>
 <th align="right">x264 bpp</th>
-<th align="right">vp9 crf according to y-ssim</th>
-<th align="right">vp9 bpp according to y-ssim</th>
-<th align="right">vp9 % reduction according to y-ssim</th>
-<th align="right">vp9 crf according to rgb-ssim</th>
-<th align="right">vp9 bpp according to rgb-ssim</th>
-<th align="right">vp9 % reduction according to rgb-ssim</th>
-<th align="right">vp9 crf according to ms-ssim</th>
-<th align="right">vp9 bpp according to ms-ssim</th>
-<th align="right">vp9 % reduction according to ms-ssim</th>
-<th align="right">vp9 crf according to psnr-hvs-m</th>
-<th align="right">vp9 bpp according to psnr-hvs-m</th>
-<th align="right">vp9 % reduction according to psnr-hvs-m</th>
-<th align="right">vp9 crf according to vmaf</th>
-<th align="right">vp9 bpp according to vmaf</th>
-<th align="right">vp9 % reduction according to vmaf</th>
+<th align="right">libvpx crf according to y-ssim</th>
+<th align="right">libvpx bpp according to y-ssim</th>
+<th align="right">libvpx % reduction according to y-ssim</th>
+<th align="right">libvpx crf according to rgb-ssim</th>
+<th align="right">libvpx bpp according to rgb-ssim</th>
+<th align="right">libvpx % reduction according to rgb-ssim</th>
+<th align="right">libvpx crf according to ms-ssim</th>
+<th align="right">libvpx bpp according to ms-ssim</th>
+<th align="right">libvpx % reduction according to ms-ssim</th>
+<th align="right">libvpx crf according to psnr-hvs-m</th>
+<th align="right">libvpx bpp according to psnr-hvs-m</th>
+<th align="right">libvpx % reduction according to psnr-hvs-m</th>
+<th align="right">libvpx crf according to vmaf</th>
+<th align="right">libvpx bpp according to vmaf</th>
+<th align="right">libvpx % reduction according to vmaf</th>
 </tr>
 </thead>
 <tbody>
@@ -654,21 +654,21 @@ MathJax.Hub.Config({
 <tr>
 <th align="right">x264 crf</th>
 <th align="right">x264 bpp</th>
-<th align="right">av1 crf according to y-ssim</th>
-<th align="right">av1 bpp according to y-ssim</th>
-<th align="right">av1 % reduction according to y-ssim</th>
-<th align="right">av1 crf according to rgb-ssim</th>
-<th align="right">av1 bpp according to rgb-ssim</th>
-<th align="right">av1 % reduction according to rgb-ssim</th>
-<th align="right">av1 crf according to ms-ssim</th>
-<th align="right">av1 bpp according to ms-ssim</th>
-<th align="right">av1 % reduction according to ms-ssim</th>
-<th align="right">av1 crf according to psnr-hvs-m</th>
-<th align="right">av1 bpp according to psnr-hvs-m</th>
-<th align="right">av1 % reduction according to psnr-hvs-m</th>
-<th align="right">av1 crf according to vmaf</th>
-<th align="right">av1 bpp according to vmaf</th>
-<th align="right">av1 % reduction according to vmaf</th>
+<th align="right">libaom crf according to y-ssim</th>
+<th align="right">libaom bpp according to y-ssim</th>
+<th align="right">libaom % reduction according to y-ssim</th>
+<th align="right">libaom crf according to rgb-ssim</th>
+<th align="right">libaom bpp according to rgb-ssim</th>
+<th align="right">libaom % reduction according to rgb-ssim</th>
+<th align="right">libaom crf according to ms-ssim</th>
+<th align="right">libaom bpp according to ms-ssim</th>
+<th align="right">libaom % reduction according to ms-ssim</th>
+<th align="right">libaom crf according to psnr-hvs-m</th>
+<th align="right">libaom bpp according to psnr-hvs-m</th>
+<th align="right">libaom % reduction according to psnr-hvs-m</th>
+<th align="right">libaom crf according to vmaf</th>
+<th align="right">libaom bpp according to vmaf</th>
+<th align="right">libaom % reduction according to vmaf</th>
 </tr>
 </thead>
 <tbody>
